@@ -1,0 +1,28 @@
+{
+  "images": [
+    {
+      "original": "flyer pasted by client (maik gardens lawn and gardening service flyer)",
+      "file": "logo.png",
+      "webp": "logo.webp",
+      "alt": "Maik Gardens badge: crossed garden fork and shovel on a dark soil disc, Gold Coast",
+      "set": "brand",
+      "source": "client flyer, badge cropped and background removed, upscaled 2x"
+    },
+    {
+      "original": "flyer pasted by client",
+      "file": "favicon.png",
+      "alt": "",
+      "set": "brand",
+      "source": "client flyer badge, resized"
+    },
+    {
+      "original": "unsplash photo-1558904541-efa843a96f01 (Petar Tonchev, Unsplash License)",
+      "file": "sunlit-lawn-low-angle-hero.jpg",
+      "webp": "sunlit-lawn-low-angle-hero.webp",
+      "alt": "Low angle view of a freshly cut green lawn in bright sun with buildings behind",
+      "set": "hero texture only",
+      "source": "stock (Unsplash). Placeholder until the client supplies real photos of their own work."
+    }
+  ],
+  "notes": "No client work photos were supplied. The work page is built without a gallery. Replace the hero with a real lawn photo when available."
+}
