@@ -1,0 +1,308 @@
+# Maik Gardens: Website Build Brief
+
+Paste this entire document into Claude Code as your first message in a fresh session, in this project's folder. Don't summarize it, execute it. Before any code gets written, do the two checks in section 1 (repo check, then a folder inventory of whatever the client supplied).
+
+---
+
+## 1. Role, Project Overview and Ground Rules
+
+You are building a real, client-ready website for a real Gold Coast lawn and gardening business. This is paid-studio quality work, not a template exercise. The finished site is vanilla HTML, CSS and JS, runs from a double-click on `index.html`, and drops onto any static host.
+
+**Working directory rule (non-negotiable):** Work entirely inside the root folder this Claude Code session is already running in. Do not create a new project folder inside Downloads, OneDrive, Desktop, or anywhere else. This session's current folder IS the project root. All files, images, and assets for Maik Gardens live inside it, and nothing gets written outside it unless you're explicitly told otherwise mid-session.
+
+### Repo and deployment rules (do this check first)
+
+1. Check whether the project root is a git repo connected to GitHub (`git rev-parse --is-inside-work-tree` and `git remote -v`).
+2. **If it IS a GitHub repo:** work directly on `main`. Commit and **push everything to `main` every time, always**. No feature branches, no pull requests, no side branches. **No preview URLs of any kind** (no Vercel/Netlify/Cloudflare preview deploys, no branch deploys, no "preview link" in your replies). Commit in small logical chunks with clear messages and push after each one so `main` is never behind the working folder.
+3. **If it is NOT a GitHub repo:** disregard all of the git instructions above and just create and update the website files in the project root. Do not run `git init`, do not create a remote, do not suggest one.
+4. Either way, never ask the client or the user for a staging link. Review happens on the real files.
+
+### Absolute copy rule: NO EM DASHES
+
+**Strictly no em dashes (the long dash character) anywhere on the website.** That covers visible copy, headings, button labels, alt text, `<title>`, meta descriptions, Open Graph tags, JSON-LD, JS strings, HTML comments, CSS comments, and the filenames. Normal hyphens (`-`) are fine. Use a comma, a full stop, a colon or a plain hyphen with spaces instead. Section 11 has a grep check you must run before you call this finished.
+
+### The real angle, spelled out
+
+Maik Gardens is a Gold Coast lawn and gardening service with a 5.0 star Google rating across 101 reviews. No origin story, founder name or founding year was found publicly (the one directory that lists a founding year uses obvious boilerplate copy, so ignore it). So the site does NOT lean on a made-up heritage. It leans on the thing the reviews actually say, over and over:
+
+- **Efficiency** is the single most mentioned theme in the reviews (19 reviews).
+- **Attention to detail** is second (16 reviews).
+- Then garden transformations, tidy cleanups, a polite team, fair pricing.
+
+The site's job is simple: show fast, clean, careful work, back it with the real review numbers, and make it one tap to call. Do not write "family owned", "passionate", "years of experience" or any history claim. None of it is confirmed. If the client supplies a real story later, it slots into the About strip on the home page (see section 7).
+
+---
+
+## 2. Client Snapshot (confirmed facts only)
+
+| Item | Detail | Source |
+|---|---|---|
+| Business name | Maik Gardens (exact casing) | Client flyer and Google listing |
+| Category | Gardener (Google Business Profile category) | Google listing |
+| Services on flyer | Mowing, Edging, Trimming, Blowing, Pruning, Cleanups "and many more" | Client flyer |
+| Area | Gold Coast, Queensland | Flyer badge reads "Gold Coast" |
+| Based in | Broadbeach Waters QLD 4218 | Google listing |
+| Phone | 0406 851 039 (`tel:+61406851039`) | Google listing |
+| Google rating | 5.0 from 101 reviews | Google listing, seen Oct 2026 |
+| Review snippets shown by Google | "Great attention to detail and super friendly service." and "Very efficient work, fast and a good price." | Google listing |
+| Review topic tags (reviews mentioning) | efficiency 19, attention to detail 16, garden transformation 6, garden cleaning 4, polite team 4, garden design 3, hedging 2, affordability 2, attentive to customer needs 2, beautiful green space 2 | Google listing |
+| Website | None exists today (Google shows "Add website") | Google listing |
+| Socials | None found. Do not invent handles. | Research |
+| Email | None found. Do not invent one. | Research |
+
+**Flyer typo to fix:** the flyer says "Prunning". The correct spelling is "Pruning". Use the correct spelling everywhere on the site.
+
+**Things the Google listing shows that must NOT be published as-is:**
+- "Open 24 hours" is almost certainly the Google default for a service business, not a real promise. Do not print "open 24/7" anywhere.
+- The street address (62 Rio Vista Blvd) looks like a home base. This is a go-to-the-customer business, so the site shows the suburb and service area only, no street address, no map. See section 6.
+
+---
+
+## 3. Assets: Logo and Images
+
+### Logo
+
+The brand mark is the round scalloped badge on the client flyer: dark soil-textured disc, white outer scallop border, orange dotted inner ring, "MAIK GARDENS" arched across the top in orange condensed caps, crossed garden fork and shovel in orange in the middle, and a small "... Gold Coast ..." banner at the bottom.
+
+- Inventory the project root first. If a standalone `logo.png` or `logo.svg` already exists, use it exactly as-is. Do not redraw, recolour or reinterpret it.
+- If instead the flyer image is in the folder (look for `flyer`, `maik`, or a lawn-and-gardening-service poster), crop the badge out cleanly, remove the background around the scalloped edge, and save as `/images/logo.png` (plus a `.webp`). Keep the crop faithful to the original badge.
+- If neither file exists, stop and tell the user to drop the logo or flyer in the folder. Only as a last resort, build a styled text wordmark from the type system in section 5 and mark it with an HTML comment so it's obvious it's a fallback. Never invent a new emblem.
+- Sample the palette straight from the logo and flyer file (see section 5), don't eyeball it.
+
+### Photos
+
+No photo set has been confirmed. Source order:
+
+1. **A local folder of the client's real work.** If the folder contains `before`, `after`, `lawn`, `garden`, or phone-camera images, run the full pipeline below on them. Never substitute stock while usable real photos exist.
+2. **The business's own Google Business Profile photos (the "By owner" tab).** If the browser tools are available, pull what's usable. Their own photos of their own work are fair game for their own site. Log where each came from.
+3. **Licensed stock, last resort, hero texture only.** Real-looking Gold Coast or subtropical lawn and garden scenes. No visible brands, no people's faces, no stock photo that obviously reads as another country (no autumn leaves, no snow, no English cottage borders). Never use stock for the work gallery.
+
+**Pipeline (for any real photo set):**
+- Inventory every file and note what each one actually shows (lawn, hedge, garden bed, cleanup, before, after).
+- Rename to `lowercase-kebab-case-descriptive.jpg`, for example `freshly-mown-front-lawn-edged-driveway.jpg`. Never leave `IMG_1234.jpg`.
+- Sort into a **featured set** (best 4 to 6, for the home page) and a **full set** (for the work page).
+- Write specific alt text per image describing what is visible.
+- Generate `.webp` copies alongside the originals, serve with `<picture>`.
+- Keep any before/after pairs together and labelled as a pair.
+- Write a small `images/manifest.json` recording the original filename, new filename, alt text, set (featured or full), and source (client folder, Google profile, or stock).
+
+If fewer than 6 genuinely usable real photos exist, do NOT pad the work page with stock. Say so in your handoff message and build the work page with only what's real.
+
+---
+
+## 4. Required File Structure
+
+Exactly this, no more, no less:
+
+```
+index.html
+services.html
+work.html
+contact.html
+styles.css
+main.js
+/images
+```
+
+- One `styles.css`, one `main.js`. No inline styles, no inline scripts, no per-page CSS or JS.
+- Vanilla HTML, CSS and JS only. No framework, no build step, no npm dependency, no bundler.
+- Must work by opening `index.html` directly from disk.
+- Fonts: Google Fonts via a `<link>` with `preconnect` is fine, or self-host `.woff2` in `/images/fonts` if you prefer. Use `font-display: swap`.
+
+---
+
+## 5. Design Direction
+
+### Clichés to avoid
+
+- No warm-cream background with a terracotta/clay accent and a big serif headline.
+- No near-black background with a single neon-green or acid accent used everywhere.
+- No hairline-rule "broadsheet" layout with dense newspaper columns.
+- No centered hero with a gradient-blob background and a generic stock photo of unrelated smiling people.
+- No numbered "01 / 02 / 03" feature cards unless there's a real sequence being described.
+- No emoji in copy or UI, no generic icon-pack icons standing in for real photography.
+- No filler marketing copy: "world-class," "premier," "unlock your potential," "passionate about delivering excellence." Every claim needs to be something you can back up from the snapshot in section 2.
+- No leaf-and-sprout clipart, no cartoon mower, no "eco-friendly green gradient" nonsense.
+
+### Palette (sample from the flyer and logo, these are starting values)
+
+Define as CSS custom properties in `:root`. Re-sample the actual hex values from the logo file and replace these if they differ.
+
+| Token | Starting hex | Why it earns its place |
+|---|---|---|
+| `--forest` | `#2F3A12` | The deep olive-forest panel colour on the flyer. Main dark surface. |
+| `--moss` | `#3F4D1C` | The slightly lighter green band on the flyer. Secondary dark surface and hover states. |
+| `--marigold` | `#E9A23B` | The orange-gold type and fork-and-shovel colour in the logo. Used sparingly: headlines on dark, buttons, the odd rule. |
+| `--soil` | `#2A221D` | The dark soil disc of the badge. Footer and the phone bar. |
+| `--turf` | `#F1F4E8` | A cool, grass-tinted off-white for light sections. Deliberately not cream. |
+| `--ink` | `#1B1F10` | Body text on light surfaces. |
+
+Marigold on `--turf` fails contrast for body text, so marigold is for large type on dark surfaces and for button fills with `--ink` text. Check WCAG AA on every pairing you actually use.
+
+### Typography
+
+- **Display:** a bold condensed sans in the same family as the flyer headline (it reads like Bebas Neue / Fjalla One / Oswald territory). Pick **Oswald** or **Fjalla One** unless you find a closer match. All caps for headings, tight but readable tracking.
+- **Body:** **Barlow** or **Source Sans 3**, 17 to 18px, generous line height.
+- Why: the flyer is a trade-service poster. Heavy condensed caps say "turn up, do the job", and a plain sturdy body face keeps it readable on a phone in a driveway.
+
+### Signature element (spend the boldness here, keep everything else disciplined)
+
+**A torn-edge split hero lifted straight from the flyer.** Left or top: a `--forest` panel with the headline in marigold condensed caps. Right or bottom: a real lawn photo that bleeds in through a ripped, irregular edge (CSS `clip-path: polygon(...)` with an uneven torn line, no image file needed). The round badge logo overlaps the seam, slightly rotated (about -4deg), with a soft shadow, exactly like it sits on the flyer. The torn edge returns once more as the divider into the footer, and nowhere else. No other decorative effects.
+
+### Motion
+
+Sparse and deliberate. A gentle scroll reveal on section headings and cards, and a hover/focus lift on buttons. **Respect `prefers-reduced-motion` completely:** when set, no reveal, no transform, no animation at all, not just reduced. No parallax, no floating shapes, no animation scattered everywhere.
+
+### Quality floor (always)
+
+Fully responsive down to 360px wide. Visible keyboard focus state on every interactive element (never `outline: none` without a replacement). Real descriptive alt text on every image. Semantic HTML5 (`header`, `nav`, `main`, `section`, `footer`), exactly one `h1` per page, correct heading order.
+
+### Mobile-first note
+
+Most visitors will arrive on a phone, from Google, wanting a mower guy. Design phone-first. Add a **sticky bottom call bar on mobile** (hidden at 900px and up): a full-width `--soil` bar with a marigold "Call 0406 851 039" button. It must not cover page content (pad the bottom of the body) or the footer links.
+
+---
+
+## 6. Location Handling (Type B: mobile / service business)
+
+Maik Gardens goes to the customer. So:
+
+- **No map embed. No pin. No street address published anywhere.**
+- Show a service area statement: "Based in Broadbeach Waters. Servicing the Gold Coast." That is all the evidence supports. Do not list specific suburbs. (See open items: ask the client which suburbs they actually cover, then a suburb list can be added.)
+- The Google listing's address is for the client's records only. Do not put it in the HTML, the JSON-LD, the meta tags or a comment.
+- Contact is phone first. Section 7 (Contact page) covers the rest.
+
+---
+
+## 7. Page-by-Page Content Brief
+
+### index.html (Home)
+
+1. **Header.** Logo badge (small), nav: Services, Our Work, Contact, and a marigold "Call now" button. Mobile: accessible hamburger (see section 9).
+2. **Hero (the signature torn-edge split).** Eyebrow: "Lawn and gardening, Gold Coast". H1 in display caps, something like "Lawns and gardens, done properly." Subline: one plain sentence listing what they do: mowing, edging, trimming, blowing, pruning and cleanups. Two buttons: "Call 0406 851 039" (primary, marigold) and "See our work" (secondary, outline). The badge overlaps the seam.
+3. **Proof strip, directly under the hero.** One row: "5.0 on Google" and "101 reviews", with a small link "Read them on Google" (see open items for the link). Only these two confirmed numbers. No invented stats, no "years in business", no "jobs completed".
+4. **What we do.** Six compact blocks, one per flyer service: Mowing, Edging, Trimming, Blowing, Pruning, Cleanups. Each gets one specific, plain sentence about what it means for the customer's yard (not a keyword stuffed line). A seventh line, "...and more. Ask us.", mirrors the flyer's "many more". Links through to `services.html`.
+5. **What the reviews keep saying.** The heart of the page. Two real Google snippets set large, as pull quotes, attributed "Google review" (no invented names): "Great attention to detail and super friendly service." and "Very efficient work, fast and a good price." Under them, a short row of the real theme counts, phrased as "19 reviews mention efficiency", "16 mention attention to detail", "6 mention garden transformations". Use only the counts in section 2.
+6. **Recent work strip.** 4 to 6 featured photos from the pipeline, with a button to `work.html`. If no real photos exist yet, drop this section entirely rather than fake it.
+7. **About strip (short, honest).** Two or three sentences max: Maik Gardens is a Gold Coast lawn and garden service based in Broadbeach Waters, doing regular mowing, tidy-ups and bigger garden cleanups. If the client has supplied a real origin story or owner name by the time you build this, use it here. If not, keep it to the confirmed facts.
+8. **Call-to-action band.** `--forest` background, marigold headline "Want a quote?", the phone number as a big tap target. Underneath: "Call or message. We'll sort a time."
+9. **Footer.** Torn-edge divider, logo, phone, "Servicing the Gold Coast", and nav links. No developer credit line. Keep the footer plain.
+
+### services.html
+
+1. **Page hero.** Smaller, on `--forest`: H1 "What we do", one line of context.
+2. **Core services, one full block each:** Mowing, Edging, Trimming, Blowing, Pruning, Cleanups. For each, write 2 to 3 specific sentences on what the job covers and what the customer gets (for example, mowing includes clean lines and clippings dealt with, but ONLY state what the client has confirmed. Where you don't know a detail, keep the sentence about the visible result, not process claims).
+3. **Also mentioned by customers:** hedging, garden design and garden transformations. These appear in reviews but not on the flyer. Show them as a lighter "Customers also book us for" list, and flag them in the open items so the client confirms them before launch.
+4. **How it works.** A real three-step sequence is fine here (so numbering is justified): 1. Call or message. 2. We sort a time and a price. 3. We do the job and clean up. Keep it plain. Do not invent an on-site quote policy, free quotes, or guarantees.
+5. **CTA band.** Same as home.
+
+### work.html
+
+1. **Page hero.** H1 "Our work".
+2. **Gallery.** The full photo set, in a responsive masonry or uniform grid. Before/after pairs shown side by side with "Before" and "After" labels. Keyboard-accessible lightbox (section 9). Each image has its own alt text from the manifest.
+3. **Review tie-in.** One pull quote from the reviews under the grid.
+4. **CTA band.**
+5. If fewer than 6 real photos exist, build the page with what's real and add a clear `<!-- TODO: add more client photos -->` comment. Do not fill with stock.
+
+### contact.html
+
+1. **Page hero.** H1 "Get in touch".
+2. **Phone first.** A huge tap-to-call button with the number. Beneath it, one line: "Call and we'll sort a quote."
+3. **No form, no backend.** Contact is click-to-call only for now. State this clearly in a code comment in `main.js`. Do not build a form that goes nowhere. (If the client later wants a form, that's a separate job.)
+4. **Service area.** "Based in Broadbeach Waters. Servicing the Gold Coast." No map, no street address.
+5. **Hours.** Do not publish hours (see open items). If you need a line, use: "Call and we'll find a time that works."
+
+---
+
+## 8. Copy and Tone
+
+Write like someone who actually does the job, not like an agency. Plain, active, specific. Short paragraphs, no adjective stacking, no hype. Confident but not cocky. Australian spelling (colour, neighbour, organise). Every claim traces back to the snapshot in section 2.
+
+**Bad, generic:** "We are passionate about delivering premium garden care solutions tailored to your outdoor lifestyle."
+
+**Good, specific:** "Mowing, edging, trimming and blowing. We do it properly, clean up after, and charge a fair price."
+
+**Bad:** "Transform your outdoor space into a world-class oasis."
+
+**Good:** "Overgrown garden? We'll cut it back, clear it out and leave it looking like someone cares about it."
+
+Button and label voice: "Call 0406 851 039", "See our work", "Want a quote?". Not "Get started today" or "Unlock your free consultation".
+
+Remember: no em dashes. Write sentences that don't need them.
+
+---
+
+## 9. main.js Required Functionality
+
+- **Accessible mobile nav toggle:** `button` with `aria-expanded` and `aria-controls`, operable by keyboard, closes on Escape and on outside click, focus returns to the button on close.
+- **Smooth scroll** for on-page anchor links, switched off under `prefers-reduced-motion`.
+- **Scroll-triggered reveal** using `IntersectionObserver`, fully disabled (elements simply visible) when `prefers-reduced-motion: reduce`.
+- **Lightbox** for `work.html`: opens on click or Enter, traps focus, closes on Escape and on backdrop click, arrow keys move between images, restores focus to the thumbnail on close, `aria-modal` and a labelled dialog role.
+- **Click-to-call:** every phone number is a `tel:+61406851039` link. On the sticky call bar, add `aria-label="Call Maik Gardens"`.
+- **Current-page nav state:** mark the active link with `aria-current="page"`.
+- **No contact form handling.** There is no backend. Contact is click-to-call only. Leave a clear comment saying so.
+- Wrap anything that touches optional elements in null checks so no page throws console errors.
+
+---
+
+## 10. Technical, SEO and Accessibility Checklist
+
+- Semantic HTML5 throughout, one `h1` per page, logical heading order.
+- `<picture>` with `.webp` and a fallback `<img>` that has `width` and `height` attributes. `loading="lazy"` on everything below the fold. Hero image NOT lazy.
+- Unique, descriptive alt text on every image. Decorative images get `alt=""`.
+- Per-page `<title>` and `<meta name="description">`. Suggested:
+  - Home: `Maik Gardens | Lawn Mowing and Gardening, Gold Coast`
+  - Services: `Services | Maik Gardens, Gold Coast Lawn and Garden Care`
+  - Work: `Our Work | Maik Gardens`
+  - Contact: `Contact | Maik Gardens, Call 0406 851 039`
+  Meta descriptions: plain sentences, under 160 characters, no em dashes.
+- Open Graph tags (`og:title`, `og:description`, `og:image`, `og:type`) using the real hero image, and a favicon made from the badge.
+- **JSON-LD** `LocalBusiness` (or `HomeAndConstructionBusiness`) on the home page: `name`, `telephone` ("+61406851039"), `areaServed` "Gold Coast", `address` with `addressLocality` "Broadbeach Waters", `addressRegion` "QLD", `addressCountry` "AU". **No `streetAddress`. No `aggregateRating`** (self-published review markup breaks Google's guidelines and the count is not independently verifiable from the site).
+- Visible focus outlines never suppressed. `aria-label` on every icon-only control.
+- WCAG AA contrast checked on the real palette pairings used.
+- No console errors, no broken links, no unused CSS at handoff.
+- Respect `prefers-reduced-motion` everywhere.
+
+---
+
+## 11. Definition of Done
+
+Run through this list and fix anything that fails before you report back:
+
+- [ ] Logo is the real Maik Gardens badge from the flyer or supplied file, not redrawn.
+- [ ] Palette values were sampled from the real logo and flyer, and defined in `:root`.
+- [ ] Only the Oswald/Fjalla-style display and a sturdy body face are used. No stray fonts.
+- [ ] Every image is real or flagged. File names are lowercase-kebab-case and descriptive. `images/manifest.json` exists and lists the source of every image.
+- [ ] Phone number is 0406 851 039 everywhere and every instance is a working `tel:` link.
+- [ ] 5.0 and 101 reviews appear exactly as given. No other numbers, stats or years appear anywhere.
+- [ ] "Pruning" is spelled correctly everywhere (the flyer typo is NOT copied).
+- [ ] No street address, no map, no "open 24 hours" anywhere on the site.
+- [ ] No invented history, owner name, founding year, team size, guarantee, insurance claim or licence.
+- [ ] Sticky mobile call bar works and doesn't cover content.
+- [ ] Tested at 360px, 768px and 1280px. No horizontal scroll.
+- [ ] Lighthouse accessibility and best-practices checks pass with no obvious failures. Keyboard-only navigation works through every page and the lightbox.
+- [ ] No lorem ipsum, no `TODO` visible to visitors.
+- [ ] **No em dashes anywhere.** Run a search across every file for the em dash character (`grep -rnP "\x{2014}" . --include="*.html" --include="*.css" --include="*.js" --include="*.json"` and also search for `&mdash;` and `&#8212;`). Zero results required. Fix every hit.
+- [ ] If this is a GitHub repo: everything is committed and pushed to `main`, no other branches, no preview URLs. If it isn't a repo: files are updated in place, nothing else created.
+- [ ] Gut check: if you can picture this exact layout working for another gardener with just a name and logo swap, revise it. The torn-edge hero, the badge on the seam and the real review numbers must be doing the work.
+
+---
+
+## 12. Open Items to Confirm With the Client Before Launch
+
+Everything below could not be verified live. Nothing here should be quietly assumed elsewhere in the build.
+
+1. **Owner name and story.** No owner, founder or founding year was found. Ask: who runs it, how long, and what's the real story. This slots into the About strip on the home page.
+2. **Team or solo.** One review tag says "polite team". Confirm how many people work in the business before writing "we" versus "I" anywhere.
+3. **Service area.** Flyer says "Gold Coast". Ask which suburbs they actually cover, then add a suburb list.
+4. **Street address.** The Google listing shows 62 Rio Vista Blvd, Broadbeach Waters. Confirm it's a home base and that the client is happy for it to stay off the website.
+5. **Hours.** Google shows "Open 24 hours", likely a default. Confirm real working hours and whether to publish any.
+6. **Hedging, garden design, garden transformations.** Mentioned by customers but not on the flyer. Confirm which the client actually offers before they go on the services page.
+7. **Review snippets.** The two quotes come from the Google listing's review summary. Pull the original reviews, get the reviewers' first names and confirm they can be quoted by name, or keep them as unnamed "Google review".
+8. **Review numbers.** 5.0 and 101 were read from Google in October 2026. Re-check on launch day and update if they've moved.
+9. **Link to the Google listing.** Confirm the exact share link to put on "Read them on Google".
+10. **Email address and socials.** None found. Ask whether they want any displayed.
+11. **Photos.** Confirm the client's own photos of their own work can be used, and get a before/after set if they have one. Image sources are logged in `images/manifest.json`. Anything not from the client needs usage rights checked.
+12. **Contact method.** The brief defaults to phone only, no form. Confirm that's what they want.
+13. **Insurance, licences, guarantees.** None are mentioned anywhere on the site because none were confirmed. Ask what the client can legitimately state.
+14. **Domain.** The business has no website today. Confirm the domain name and who registers it.
